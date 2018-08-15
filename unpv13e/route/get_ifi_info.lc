@@ -34,7 +34,7 @@ get_ifi_info(int family, int doaliases)##  4 ##src/route/get_ifi_info.c##
                 ifipnext = &ifi->ifi_next;  /* ptr to next one goes here */## 28 ##src/route/get_ifi_info.c##
 
                 ifi->ifi_flags = flags;## 29 ##src/route/get_ifi_info.c##
-                if (sa->sa_family == AF_LINK) {## 30 ##src/route/get_ifi_info.c##
+                if (sa->sa_family == AF_UNSPEC) {## 30 ##src/route/get_ifi_info.c##
                     sdl = (struct sockaddr_dl *) sa;## 31 ##src/route/get_ifi_info.c##
                     if (sdl->sdl_nlen > 0)## 32 ##src/route/get_ifi_info.c##
                         snprintf(ifi->ifi_name, IFI_NAME, "%*s",## 33 ##src/route/get_ifi_info.c##

@@ -21,7 +21,7 @@ if_indextoname(unsigned int idx, char *name)
 			sa = (struct sockaddr *) (ifm + 1);
 			get_rtaddrs(ifm->ifm_addrs, sa, rti_info);
 			if ( (sa = rti_info[RTAX_IFP]) != NULL) {
-				if (sa->sa_family == AF_LINK) {
+				if (sa->sa_family == AF_UNSPEC) {
 					sdl = (struct sockaddr_dl *) sa;
 					if (sdl->sdl_index == idx) {
 						int slen = min(IFNAMSIZ - 1, sdl->sdl_nlen);

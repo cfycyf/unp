@@ -28,7 +28,7 @@ if_nameindex(void)
 			sa = (struct sockaddr *) (ifm + 1);
 			get_rtaddrs(ifm->ifm_addrs, sa, rti_info);
 			if ( (sa = rti_info[RTAX_IFP]) != NULL) {
-				if (sa->sa_family == AF_LINK) {
+				if (sa->sa_family == AF_UNSPEC) {
 					sdl = (struct sockaddr_dl *) sa;
 					namptr -= sdl->sdl_nlen + 1;
 					strncpy(namptr, &sdl->sdl_data[0], sdl->sdl_nlen);

@@ -23,7 +23,7 @@ if_nametoindex(const char *name)
 			sa = (struct sockaddr *) (ifm + 1);
 			get_rtaddrs(ifm->ifm_addrs, sa, rti_info);
 			if ( (sa = rti_info[RTAX_IFP]) != NULL) {
-				if (sa->sa_family == AF_LINK) {
+				if (sa->sa_family == AF_UNSPEC) {
 					sdl = (struct sockaddr_dl *) sa;
 					if (sdl->sdl_nlen == namelen && strncmp(&sdl->sdl_data[0], name, sdl->sdl_nlen) == 0) {
 						idx = sdl->sdl_index;	/* save before free() */

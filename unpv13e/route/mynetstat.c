@@ -84,7 +84,7 @@ pr_iflist(int family)
 				if (flags & IFF_POINTOPOINT)	printf("P2P ");
 				printf(">\n");
 
-				if (sa->sa_family == AF_LINK &&
+				if (sa->sa_family == AF_UNSPEC &&
 					(sdl = (struct sockaddr_dl *) sa) &&
 					(sdl->sdl_alen > 0)) {
 					ptr = (u_char *) &sdl->sdl_data[sdl->sdl_nlen];

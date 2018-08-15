@@ -52,7 +52,7 @@ main(int argc, char **argv)
 #endif
 
 #ifdef	HAVE_SOCKADDR_DL_STRUCT
-		case AF_LINK: {
+		case AF_UNSPEC: {
 			struct sockaddr_dl	*sdlptr;
 			char				str[18];
 			char				*etherprint(const u_char *, char *);

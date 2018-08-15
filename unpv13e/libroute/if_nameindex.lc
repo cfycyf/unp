@@ -28,7 +28,7 @@ if_nameindex(void)##  4 ##src/libroute/if_nameindex.c##
             sa = (struct sockaddr *) (ifm + 1);## 23 ##src/libroute/if_nameindex.c##
             get_rtaddrs(ifm->ifm_addrs, sa, rti_info);## 24 ##src/libroute/if_nameindex.c##
             if ((sa = rti_info[RTAX_IFP]) != NULL) {## 25 ##src/libroute/if_nameindex.c##
-                if (sa->sa_family == AF_LINK) {## 26 ##src/libroute/if_nameindex.c##
+                if (sa->sa_family == AF_UNSPEC) {## 26 ##src/libroute/if_nameindex.c##
                     sdl = (struct sockaddr_dl *) sa;## 27 ##src/libroute/if_nameindex.c##
                     namptr -= sdl->sdl_nlen + 1;## 28 ##src/libroute/if_nameindex.c##
                     strncpy(namptr, &sdl->sdl_data[0], sdl->sdl_nlen);## 29 ##src/libroute/if_nameindex.c##

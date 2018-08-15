@@ -22,7 +22,7 @@ if_nametoindex(const char *name)##  4 ##src/libroute/if_nametoindex.c##
             sa = (struct sockaddr *) (ifm + 1);## 18 ##src/libroute/if_nametoindex.c##
             get_rtaddrs(ifm->ifm_addrs, sa, rti_info);## 19 ##src/libroute/if_nametoindex.c##
             if ((sa = rti_info[RTAX_IFP]) != NULL) {## 20 ##src/libroute/if_nametoindex.c##
-                if (sa->sa_family == AF_LINK) {## 21 ##src/libroute/if_nametoindex.c##
+                if (sa->sa_family == AF_UNSPEC) {## 21 ##src/libroute/if_nametoindex.c##
                     sdl = (struct sockaddr_dl *) sa;## 22 ##src/libroute/if_nametoindex.c##
                     if (strncmp(&sdl->sdl_data[0], name, sdl->sdl_nlen) == 0) {## 23 ##src/libroute/if_nametoindex.c##
                         index = sdl->sdl_index; /* save before free() */## 24 ##src/libroute/if_nametoindex.c##
