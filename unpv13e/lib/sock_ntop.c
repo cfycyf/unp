@@ -56,14 +56,14 @@ sock_ntop(const struct sockaddr *sa, socklen_t salen)
 #endif
 
 #ifdef	HAVE_SOCKADDR_DL_STRUCT
-	case AF_LINK: {
+	case AF_UNSPEC: {
 		struct sockaddr_dl	*sdl = (struct sockaddr_dl *) sa;
 
 		if (sdl->sdl_nlen > 0)
 			snprintf(str, sizeof(str), "%*s (index %d)",
 					 sdl->sdl_nlen, &sdl->sdl_data[0], sdl->sdl_index);
 		else
-			snprintf(str, sizeof(str), "AF_LINK, index=%d", sdl->sdl_index);
+			snprintf(str, sizeof(str), "AF_UNSPEC, index=%d", sdl->sdl_index);
 		return(str);
 	}
 #endif

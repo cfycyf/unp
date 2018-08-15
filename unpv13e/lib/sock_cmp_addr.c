@@ -34,7 +34,7 @@ sock_cmp_addr(const struct sockaddr *sa1, const struct sockaddr *sa2,
 #endif
 
 #ifdef	HAVE_SOCKADDR_DL_STRUCT
-	case AF_LINK: {
+	case AF_UNSPEC: {
 		return(-1);		/* no idea what to compare here ? */
 	}
 #endif

@@ -59,8 +59,8 @@ get_ifi_info(int family, int doaliases)
 		ptr += sizeof(ifr->ifr_name) + len;	/* for next one in buffer */
 
 #ifdef	HAVE_SOCKADDR_DL_STRUCT
-		/* assumes that AF_LINK precedes AF_INET or AF_INET6 */
-		if (ifr->ifr_addr.sa_family == AF_LINK) {
+		/* assumes that AF_UNSPEC precedes AF_INET or AF_INET6 */
+		if (ifr->ifr_addr.sa_family == AF_UNSPEC) {
 			struct sockaddr_dl *sdl = (struct sockaddr_dl *)&ifr->ifr_addr;
 			sdlname = ifr->ifr_name;
 			idx = sdl->sdl_index;

@@ -58,8 +58,8 @@ get_ifi_info(int family, int doaliases)##  3 ##src/lib/get_ifi_info.c##
         ptr += sizeof(ifr->ifr_name) + len; /* for next one in buffer */## 50 ##src/lib/get_ifi_info.c##
 
 #ifdef  HAVE_SOCKADDR_DL## 51 ##src/lib/get_ifi_info.c##
-        /* assumes that AF_LINK precedes AF_INET or AF_INET6 */## 52 ##src/lib/get_ifi_info.c##
-        if (ifr->ifr_addr.sa_family == AF_LINK) {## 53 ##src/lib/get_ifi_info.c##
+        /* assumes that AF_UNSPEC precedes AF_INET or AF_INET6 */## 52 ##src/lib/get_ifi_info.c##
+        if (ifr->ifr_addr.sa_family == AF_UNSPEC) {## 53 ##src/lib/get_ifi_info.c##
             struct sockaddr_dl *sdl = (struct sockaddr_dl *) &ifr->ifr_addr;## 54 ##src/lib/get_ifi_info.c##
             idx = sdl->sdl_index;## 55 ##src/lib/get_ifi_info.c##
             haddr = sdl->sdl_data + sdl->sdl_nlen;## 56 ##src/lib/get_ifi_info.c##
