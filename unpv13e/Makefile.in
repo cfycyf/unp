@@ -1,8 +1,10 @@
 include ./Make.defines
 
 all:
-	@echo "Nothing to make in this directory"
-	@echo "Please read the README file"
+	@echo "make the libs"
+	-cd lib && make
+	-cd libfree && make
+	-cd libgai && make 
 
 clean:
 	rm -f $(CLEANFILES)
