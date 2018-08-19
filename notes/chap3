@@ -1,0 +1,61 @@
+套接字编程简介
+IPv4 socket 结构:
+	struct in_addr{
+		in_addr_t s_addr;    //32 bit IPv4 addr
+	};
+	
+	struct sockaddr_in{
+		uint8_t sin_len;			length of structure(16)
+		sa_family_t sin_family;		AF_INET
+		in_port_t sin_port;			16 bit TCP/UDP port
+		struct in_addr sin_addr;	32 bit IPv4 addr
+		char sin_zero[8];			unused
+	};
+	
+字节排序函数
+	#include<netinet/in.h>
+	uint16_t htons(uint16_t host16bitvalue);	host port to net port
+	uint32_t htonl(uint32_t hoest32bitvalue);	host addr to net addr
+	
+	uint16_t ntohs(uint16_t net16bitvalue);		net port to host port
+	uint32_t ntohl(uint32_t net32bitvalue);		ner addr to host addr
+
+	h host, n network, s unsigned short 16bit, l unsigned long 32bit.
+	使用这个作为local到network参数的转换， 不用担心大小端的问题。
+
+字节操纵函数
+	
+	#include<strings.h>
+	void bzero(void *dest, size_t nbytes);		初始化置0
+	void bcopy(const void *ptr1, const void *ptr2, size_t nbytes);
+	int bcmp(const void *ptr1, const void *ptr2, size_t nbytes);
+							return:  sucess: 0, fail: non 0
+
+inet_aton, inet_ntoa
+	
+	#include <arpa/inet.h>
+	int inet_aton(const char *strptr, struct in_addr *addrptr);
+						success: 1, fail: 0
+	char *inet_ntoa(struct in_addr inaddr);
+						返回一个点分十进制的数串指针
+	这两个函数用的不多，一般都用 inet_pton inet_ntop
+
+inet_pton, inet_ntop
+
+	#include <arpa/inet.h>
+	int inet_pton(int family, const char *strptr, void *addrptr);
+						success: 1, fail: 0
+	const char *inet_ntop(int family, const void *addrptr, char *strptr, size_t len);
+						success: a point to result, fail: NULL
+	
+	p presentation, n numeric.
+	这两个函数是随IPv6 出现的。 适用于IPv4 和IPv6.
+
+	inet_pton: 尝试将字符串转成二进制并存储在in_addr的结构中
+	inet_notp: 将in_addr中的二进制传成字符串并返回指针
+
+	<netinet/in.h>中有定义len长度
+	#define INET_ADDRSTRLEN 16		IPv4
+	#define INET6_ADDRSTRLEN 46		IPv6
+
+
