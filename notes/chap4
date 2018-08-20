@@ -1,0 +1,59 @@
+基本TCP套接字编程
+
+socket 函数
+	#include<sys/socket.h>
+	int socket(int family, int type, int protocol);
+	
+	family 协议族
+	AF_INET AF_INET6
+	AF_LOCAL	Unix域协议(15章)
+	AF_ROUTE	路由套接字(18章)
+	AF_KEY		秘钥套接字(19章)
+
+	type 套接字类型
+	SOCK_STREAM 
+	SOCK_DGRAM
+	SOCK_SEQPACKET		有序分组套接字
+	SOCK_RAW			原始套接字
+	SOCK_PACKET(29章)
+
+	protocol 协议类型常值，或者设为0
+	IPPROTO_CP		TCP传输协议
+	IPPROTO_UDP		UDP传输协议
+	IPPROTO_SCTP	SCTP传输协议
+
+connect 函数
+	#include<sys/socket.h>
+	int connect(int sockfd, const struct sockaddr *srvaddr, socklen_t addrlen);
+	sockfd是socket函数返回的fd
+	TCP客户用connect函数来建立与TCP服务器的连接
+	TCP 套接字 connect 会激发TCP的三次握手。连接成功和出错都有返回
+
+bind 函数
+	bind把本地协议地址赋予一个套接字，对于网际协议，是IP和端口号的组合。
+	#include <sys/socket.h>
+	int bind(int sockfd, const struct sockaddr *myaddr, socklen_t addrlen);
+								success: 0, fail: -1
+listen 函数
+	#include<sys/socket.h>
+	int listen(int sockfd, int backlog);
+				success:0 , fail: -1
+	仅由TCP服务器调用:
+	1. socket函数创建套接字时，它被减少为一个主动套接字， listen函数把一个未连接的套接字转换成一个被动套接字。
+	2 listen的第二个参数规定了内核应该为相应的套接字排队的最大连接数。
+	通常在socket和bind之后，accept之前调用。
+
+accept 函数
+	#include<sys.socket.h>	
+	int accept(int sockfd, struct sockaddr *cliadr, socklen_t *addrlen);
+			success: > 0, fail: -1
+	accept会返回一个全新的文件描述符，是进行读写操作的。
+
+并发服务器
+	基本的socket建立是一个迭代服务器， 当客户请求可能花费较长时间，我们希望
+	服务多个客户， 这就是并发服务器。最简单的并发服务器就是fork子进程。
+
+
+
+
+
